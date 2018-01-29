@@ -1,0 +1,6 @@
+TFA433          KEYWORD1
+tfaResult       KEYWORD1
+start           KEYWORD2
+stop            KEYWORD2
+isDataAvailable KEYWORD2
+getData         KEYWORD2
