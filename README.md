@@ -3,10 +3,10 @@
 Use your Arduino to receive temperature and humidity data from TFA remote sensor.
 
 ## Download
-https://github.com/denxhun/tfa433
+https://github.com/denxhun/TFA433
 
 ## Wiki
-https://github.com/denxhun/tfa433/wiki
+https://github.com/denxhun/TFA433/wiki
 
 ## Info
 ### Hardware
