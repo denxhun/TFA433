@@ -18,38 +18,44 @@ Senders are usually repeats the message 3-6 times. Between repeats there are 2 "
 #ifndef tfa433_h
 #define tfa433_h
 
-#include <Arduino.h>
+#if ARDUINO >= 100
+ #include "Arduino.h"
+#else
+ #include "WProgram.h"
+#endif
 
 typedef struct{
-  byte id;
-  byte channel;
-  byte humidity;
-  int temperature;
-  bool battery;
+	byte id;
+	byte channel;
+	byte humidity;
+	int temperature;
+	bool battery;
 } tfaResult;
 
 class TFA433{
-  public:
-    TFA433(int pin);
-    void start();
-    void stop();
-    bool isDataAvailable();
-    void getData(byte &id, byte &channel, byte &humidity, int &temperature, bool &battery);
-    tfaResult getData();
-  private:
-    const static byte BUFF_SIZE = 50;
+	public:
+		TFA433();
+		void start(int pin);
+		void stop();
+		bool isDataAvailable();
+		void getData(byte &id, byte &channel, byte &humidity, int &temperature, bool &battery);
+		tfaResult getData();
+		
+	private:
+		const static int _BUFF_SIZE;
 
-    volatile static bool avail;
-    volatile static byte buff[BUFF_SIZE];
-    volatile static byte buffEnd;
+		volatile static bool _avail;
+		volatile static byte _buff[];
+		volatile static byte _buffEnd;
 
-    static byte lastBuff[BUFF_SIZE];
-    byte pin;
+		static unsigned long _lastPackageArrived;
+		static byte _lastBuff[];
+		static byte _pin;
 
-    static void handler();
-    static bool isRepeat();
-    int binToDecRev(volatile byte *binary, int s, int e);
-    int binToDec(volatile byte *binary, int s, int e);
+		static void _handler();
+		static bool _isRepeat();
+		int _binToDecRev(volatile byte *binary, int s, int e);
+		int _binToDec(volatile byte *binary, int s, int e);
 };
 
 #endif
